@@ -16,13 +16,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class CmdName implements IPermissibleCommand {
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("name", "setname", "rename");
+        return Collections.singletonList("nazwa");
     }
 
     @Override
@@ -32,7 +33,7 @@ public class CmdName implements IPermissibleCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "name <" + Message.COMMAND_ARGUMENT_ISLAND_NAME.getMessage(locale) + ">";
+        return "nazwa <" + Message.COMMAND_ARGUMENT_ISLAND_NAME.getMessage(locale) + ">";
     }
 
     @Override

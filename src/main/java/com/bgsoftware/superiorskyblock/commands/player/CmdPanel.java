@@ -22,7 +22,7 @@ public class CmdPanel implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("panel", "manager", "cp");
+        return Collections.singletonList("panel");
     }
 
     @Override
@@ -32,7 +32,7 @@ public class CmdPanel implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "panel [members/visitors] [toggle]";
+        return "panel [czlonkowie/goscie] [przelacz]";
     }
 
     @Override
@@ -67,13 +67,13 @@ public class CmdPanel implements ISuperiorCommand {
         SuperiorPlayer superiorPlayer = arguments.getSuperiorPlayer();
 
         if (args.length > 1) {
-            if (args[1].equalsIgnoreCase("members")) {
-                plugin.getCommands().dispatchSubCommand(sender, "members");
+            if (args[1].equalsIgnoreCase("czlonkowie")) {
+                plugin.getCommands().dispatchSubCommand(sender, "czlonkowie");
                 return;
-            } else if (args[1].equalsIgnoreCase("visitors")) {
-                plugin.getCommands().dispatchSubCommand(sender, "visitors");
+            } else if (args[1].equalsIgnoreCase("goscie")) {
+                plugin.getCommands().dispatchSubCommand(sender, "goscie");
                 return;
-            } else if (args[1].equalsIgnoreCase("toggle")) {
+            } else if (args[1].equalsIgnoreCase("przelacz")) {
                 if (!PluginEventsFactory.callPlayerTogglePanelEvent(superiorPlayer))
                     return;
 
@@ -97,16 +97,16 @@ public class CmdPanel implements ISuperiorCommand {
             return Collections.emptyList();
 
         List<String> extraArgument = new LinkedList<>();
-        extraArgument.add("toggle");
+        extraArgument.add("przelacz");
         if (!(sender instanceof Player)) {
-            extraArgument.add("visitors");
-            extraArgument.add("members");
+            extraArgument.add("goscie");
+            extraArgument.add("czlonkowie");
         } else {
             SuperiorPlayer superiorPlayer = plugin.getPlayers().getSuperiorPlayer(sender);
             if (superiorPlayer.hasPermission("superior.island.visitors"))
-                extraArgument.add("visitors");
+                extraArgument.add("goscie");
             if (superiorPlayer.hasPermission("superior.island.members"))
-                extraArgument.add("members");
+                extraArgument.add("czlonkowie");
         }
 
         return CommandTabCompletes.getCustomComplete(args[1], extraArgument);

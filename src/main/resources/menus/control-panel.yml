@@ -15,9 +15,9 @@ pattern:
   - '# ~ # = # - # + #'
   - '2 2 2 2 2 2 2 2 2'
 
-members: '+'
-settings: '@'
-visitors: '-'
+czlonkowie: '+'
+ustawienia: '@'
+goscie: '-'
 
 items:
   '!':
@@ -148,22 +148,22 @@ sounds:
 
 commands:
   '!':
-    - '[player] is tp'
+    - '[player] is dom'
   '$':
-    - '[player] is permissions'
+    - '[player] is uprawnienia'
   '%':
-    - '[player] is biome'
+    - '[player] is ustawbiom'
   '_':
     - '[player] is bank'
   '^':
-    - '[player] is upgrade'
+    - '[player] is ulepsz'
   '&':
-    - '[player] is top'
+    - '[player] is ranking'
   '*':
-    - '[player] is missions'
+    - '[player] is zadania'
   '1':
-    - '[player] is counts'
+    - '[player] is listablokow'
   '~':
-    - '[player] is disband'
+    - '[player] is usun'
   '=':
-    - '[player] is chest'
+    - '[player] is skarbiec'

@@ -28,13 +28,13 @@ public class ControlPanelButton extends AbstractMenuViewButton<IslandMenuView> {
     public void onButtonClick(InventoryClickEvent clickEvent) {
         switch (getTemplate().controlPanelAction) {
             case OPEN_MEMBERS:
-                plugin.getCommands().dispatchSubCommand(clickEvent.getWhoClicked(), "members");
+                plugin.getCommands().dispatchSubCommand(clickEvent.getWhoClicked(), "czlonkowie");
                 break;
             case OPEN_SETTINGS:
-                plugin.getCommands().dispatchSubCommand(clickEvent.getWhoClicked(), "settings");
+                plugin.getCommands().dispatchSubCommand(clickEvent.getWhoClicked(), "ustawienia");
                 break;
             case OPEN_VISITORS:
-                plugin.getCommands().dispatchSubCommand(clickEvent.getWhoClicked(), "visitors");
+                plugin.getCommands().dispatchSubCommand(clickEvent.getWhoClicked(), "goscie");
                 break;
         }
     }

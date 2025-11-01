@@ -15,13 +15,14 @@ import com.bgsoftware.superiorskyblock.island.warp.SignWarp;
 import org.bukkit.entity.Player;
 
 import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 public class CmdDelWarp implements IPermissibleCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("delwarp");
+        return Collections.singletonList("usunwarp");
     }
 
     @Override
@@ -31,7 +32,7 @@ public class CmdDelWarp implements IPermissibleCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "delwarp <" + Message.COMMAND_ARGUMENT_WARP_NAME.getMessage(locale) + "...>";
+        return "usunwarp <" + Message.COMMAND_ARGUMENT_WARP_NAME.getMessage(locale) + "...>";
     }
 
     @Override

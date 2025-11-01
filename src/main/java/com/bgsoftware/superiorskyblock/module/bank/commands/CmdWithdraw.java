@@ -19,7 +19,7 @@ public class CmdWithdraw implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("withdraw");
+        return Collections.singletonList("wplac");
     }
 
     @Override
@@ -29,7 +29,7 @@ public class CmdWithdraw implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "withdraw <" + Message.COMMAND_ARGUMENT_AMOUNT.getMessage(locale) + ">";
+        return "wplac <" + Message.COMMAND_ARGUMENT_AMOUNT.getMessage(locale) + ">";
     }
 
     @Override
@@ -65,7 +65,7 @@ public class CmdWithdraw implements ISuperiorCommand {
 
         BigDecimal amount = BigDecimal.valueOf(-1);
 
-        if (args[1].equalsIgnoreCase("all") || args[1].equals("*")) {
+        if (args[1].equalsIgnoreCase("wszystko") || args[1].equals("*")) {
             amount = island.getIslandBank().getBalance();
         } else try {
             amount = new BigDecimal(args[1]);

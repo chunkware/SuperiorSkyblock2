@@ -22,7 +22,7 @@ public class CmdChest implements IPermissibleCommand {
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("chest", "vault");
+        return Collections.singletonList("skarbiec");
     }
 
     @Override
@@ -32,7 +32,7 @@ public class CmdChest implements IPermissibleCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "chest [" + Message.COMMAND_ARGUMENT_PAGE.getMessage(locale) + "]";
+        return "skarbiec [" + Message.COMMAND_ARGUMENT_PAGE.getMessage(locale) + "]";
     }
 
     @Override

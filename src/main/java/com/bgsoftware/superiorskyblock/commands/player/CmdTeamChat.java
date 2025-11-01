@@ -21,7 +21,7 @@ public class CmdTeamChat implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("teamchat", "chat", "tc");
+        return Collections.singletonList("czat");
     }
 
     @Override
@@ -31,7 +31,7 @@ public class CmdTeamChat implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "teamchat [" + Message.COMMAND_ARGUMENT_MESSAGE.getMessage(locale) + "]";
+        return "czat [" + Message.COMMAND_ARGUMENT_MESSAGE.getMessage(locale) + "]";
     }
 
     @Override

@@ -18,7 +18,7 @@ public class BannedPlayersPagedObjectButton extends AbstractPagedMenuButton<Menu
 
     @Override
     public void onButtonClick(InventoryClickEvent clickEvent) {
-        plugin.getCommands().dispatchSubCommand(clickEvent.getWhoClicked(), "unban", pagedObject.getName());
+        plugin.getCommands().dispatchSubCommand(clickEvent.getWhoClicked(), "odblokuj", pagedObject.getName());
     }
 
     @Override

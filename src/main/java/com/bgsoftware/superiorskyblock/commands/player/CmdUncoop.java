@@ -21,7 +21,7 @@ public class CmdUncoop implements IPermissibleCommand {
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("uncoop", "untrust");
+        return Collections.singletonList("nieufaj");
     }
 
     @Override
@@ -31,7 +31,7 @@ public class CmdUncoop implements IPermissibleCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "uncoop <" + Message.COMMAND_ARGUMENT_PLAYER_NAME.getMessage(locale) + ">";
+        return "nieufaj <" + Message.COMMAND_ARGUMENT_PLAYER_NAME.getMessage(locale) + ">";
     }
 
     @Override

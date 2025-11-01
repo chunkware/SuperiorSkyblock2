@@ -13,12 +13,13 @@ import com.bgsoftware.superiorskyblock.island.privilege.IslandPrivileges;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Arrays;
 
 public class CmdSettings implements IPermissibleCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("settings");
+        return Collections.singletonList("ustawienia");
     }
 
     @Override
@@ -28,7 +29,7 @@ public class CmdSettings implements IPermissibleCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "settings [reset]";
+        return "ustawienia [resetuj]";
     }
 
     @Override
@@ -63,7 +64,7 @@ public class CmdSettings implements IPermissibleCommand {
 
     @Override
     public void execute(SuperiorSkyblockPlugin plugin, SuperiorPlayer superiorPlayer, Island island, String[] args) {
-        if (args.length == 2 && args[1].equalsIgnoreCase("reset")) {
+        if (args.length == 2 && args[1].equalsIgnoreCase("resetuj")) {
             if (PluginEventsFactory.callIslandClearFlagsEvent(island, superiorPlayer)) {
                 island.resetSettings();
                 Message.SETTINGS_RESET_SELF.send(superiorPlayer);
@@ -76,7 +77,7 @@ public class CmdSettings implements IPermissibleCommand {
 
     @Override
     public List<String> tabComplete(SuperiorSkyblockPlugin plugin, SuperiorPlayer superiorPlayer, Island island, String[] args) {
-        return args.length == 2 ? CommandTabCompletes.getCustomComplete(args[1], "reset") : Collections.emptyList();
+        return args.length == 2 ? CommandTabCompletes.getCustomComplete(args[1], "resetuj") : Collections.emptyList();
     }
 
 }

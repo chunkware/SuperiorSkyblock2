@@ -73,7 +73,7 @@ public class UpgradeButton extends AbstractMenuViewButton<IslandMenuView> {
         if (upgrade == null)
             return;
 
-        plugin.getCommands().dispatchSubCommand(clickEvent.getWhoClicked(), "rankup", upgrade.getName());
+        plugin.getCommands().dispatchSubCommand(clickEvent.getWhoClicked(), "ulepsz", upgrade.getName());
         menuView.refreshView();
     }
 

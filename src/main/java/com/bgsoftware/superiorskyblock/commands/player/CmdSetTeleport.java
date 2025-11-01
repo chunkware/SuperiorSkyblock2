@@ -15,13 +15,14 @@ import com.bgsoftware.superiorskyblock.island.privilege.IslandPrivileges;
 import org.bukkit.Location;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class CmdSetTeleport implements IPermissibleCommand {
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("setteleport", "settp", "setgo", "sethome");
+        return Collections.singletonList("ustawdom");
     }
 
     @Override
@@ -31,7 +32,7 @@ public class CmdSetTeleport implements IPermissibleCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "setteleport";
+        return "ustawdom";
     }
 
     @Override

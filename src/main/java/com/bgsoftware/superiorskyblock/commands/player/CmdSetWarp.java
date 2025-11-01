@@ -16,6 +16,7 @@ import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 
 import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 public class CmdSetWarp implements IPermissibleCommand {
@@ -24,7 +25,7 @@ public class CmdSetWarp implements IPermissibleCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("setwarp");
+        return Collections.singletonList("ustawwarp");
     }
 
     @Override
@@ -34,7 +35,7 @@ public class CmdSetWarp implements IPermissibleCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        StringBuilder usage = new StringBuilder("setwarp <")
+        StringBuilder usage = new StringBuilder("ustawwarp <")
                 .append(Message.COMMAND_ARGUMENT_WARP_NAME.getMessage(locale)).append(">");
 
         if (plugin.getSettings().isWarpCategories())

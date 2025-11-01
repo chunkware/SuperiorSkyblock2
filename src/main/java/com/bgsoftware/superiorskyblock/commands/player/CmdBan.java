@@ -12,13 +12,14 @@ import com.bgsoftware.superiorskyblock.island.IslandUtils;
 import com.bgsoftware.superiorskyblock.island.privilege.IslandPrivileges;
 
 import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 public class CmdBan implements IPermissibleCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("ban");
+        return Collections.singletonList("zablokuj");
     }
 
     @Override
@@ -28,7 +29,7 @@ public class CmdBan implements IPermissibleCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "ban <" + Message.COMMAND_ARGUMENT_PLAYER_NAME.getMessage(locale) + ">";
+        return "zablokuj <" + Message.COMMAND_ARGUMENT_PLAYER_NAME.getMessage(locale) + ">";
     }
 
     @Override

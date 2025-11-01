@@ -315,13 +315,13 @@ public class CommandsManagerImpl extends Manager implements CommandsManager {
 
                     String subCommandToExecute;
                     if (args.length != 0) {
-                        subCommandToExecute = "help";
+                        subCommandToExecute = "pomoc";
                     } else if (island == null) {
-                        subCommandToExecute = "create";
+                        subCommandToExecute = "stworz";
                     } else if (superiorPlayer.hasToggledPanel()) {
                         subCommandToExecute = "panel";
                     } else {
-                        subCommandToExecute = "tp";
+                        subCommandToExecute = "dom";
                     }
 
                     // We don't want to end up in an infinite loop
@@ -334,8 +334,8 @@ public class CommandsManagerImpl extends Manager implements CommandsManager {
             }
 
             // We don't want to end up in an infinite loop
-            if (!"help".equalsIgnoreCase(executedSubCommand)) {
-                dispatchSubCommand(sender, "help");
+            if (!"pomoc".equalsIgnoreCase(executedSubCommand)) {
+                dispatchSubCommand(sender, "pomoc");
             }
 
             return false;

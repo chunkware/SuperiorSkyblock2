@@ -14,12 +14,13 @@ import com.bgsoftware.superiorskyblock.island.privilege.IslandPrivileges;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Arrays;
 
 public class CmdSetDiscord implements IPermissibleCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("setdiscord");
+        return Collections.singletonList("ustawdiscord");
     }
 
     @Override
@@ -29,7 +30,7 @@ public class CmdSetDiscord implements IPermissibleCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "setdiscord <" + Message.COMMAND_ARGUMENT_DISCORD.getMessage(locale) + ">";
+        return "ustawdiscord <" + Message.COMMAND_ARGUMENT_DISCORD.getMessage(locale) + ">";
     }
 
     @Override

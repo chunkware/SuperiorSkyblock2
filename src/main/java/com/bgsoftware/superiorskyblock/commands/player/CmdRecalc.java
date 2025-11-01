@@ -17,7 +17,7 @@ public class CmdRecalc implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("recalc", "recalculate", "level");
+        return Collections.singletonList("przelicz");
     }
 
     @Override
@@ -27,7 +27,7 @@ public class CmdRecalc implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "recalc";
+        return "przelicz";
     }
 
     @Override

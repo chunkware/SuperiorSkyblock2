@@ -11,6 +11,7 @@ import com.bgsoftware.superiorskyblock.commands.ISuperiorCommand;
 import com.bgsoftware.superiorskyblock.island.IslandUtils;
 import org.bukkit.command.CommandSender;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class CmdBorder implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("border");
+        return Collections.singletonList("bariera");
     }
 
     @Override
@@ -28,7 +29,7 @@ public class CmdBorder implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "border [" + Message.COMMAND_ARGUMENT_BORDER_COLOR.getMessage(locale) + "]";
+        return "bariera [" + Message.COMMAND_ARGUMENT_BORDER_COLOR.getMessage(locale) + "]";
     }
 
     @Override

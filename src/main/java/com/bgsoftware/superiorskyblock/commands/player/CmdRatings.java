@@ -10,13 +10,14 @@ import com.bgsoftware.superiorskyblock.commands.IPermissibleCommand;
 import com.bgsoftware.superiorskyblock.island.privilege.IslandPrivileges;
 
 import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 public class CmdRatings implements IPermissibleCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("ratings");
+        return Collections.singletonList("oceny");
     }
 
     @Override
@@ -26,7 +27,7 @@ public class CmdRatings implements IPermissibleCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "ratings";
+        return "oceny";
     }
 
     @Override

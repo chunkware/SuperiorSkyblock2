@@ -21,7 +21,7 @@ public class CmdAccept implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("accept", "join");
+        return Collections.singletonList("dolacz");
     }
 
     @Override
@@ -31,7 +31,7 @@ public class CmdAccept implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "accept [" +
+        return "dolacz [" +
                 Message.COMMAND_ARGUMENT_PLAYER_NAME.getMessage(locale) + "/" +
                 Message.COMMAND_ARGUMENT_ISLAND_NAME.getMessage(locale) + "]";
     }

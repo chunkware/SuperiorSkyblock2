@@ -16,7 +16,7 @@ public class CmdMissions implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("missions", "challenges");
+        return Collections.singletonList("zadania");
     }
 
     @Override
@@ -26,7 +26,7 @@ public class CmdMissions implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "missions";
+        return "zadania";
     }
 
     @Override

@@ -18,7 +18,7 @@ public class CoopsPagedObjectButton extends AbstractPagedMenuButton<MenuCoops.Vi
 
     @Override
     public void onButtonClick(InventoryClickEvent clickEvent) {
-        plugin.getCommands().dispatchSubCommand(clickEvent.getWhoClicked(), "uncoop", pagedObject.getName());
+        plugin.getCommands().dispatchSubCommand(clickEvent.getWhoClicked(), "nieufaj", pagedObject.getName());
     }
 
     @Override

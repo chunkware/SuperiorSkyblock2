@@ -13,13 +13,14 @@ import com.bgsoftware.superiorskyblock.core.messages.Message;
 import com.bgsoftware.superiorskyblock.island.privilege.IslandPrivileges;
 
 import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 public class CmdDemote implements IPermissibleCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("demote");
+        return Collections.singletonList("degraduj");
     }
 
     @Override
@@ -29,7 +30,7 @@ public class CmdDemote implements IPermissibleCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "demote <" + Message.COMMAND_ARGUMENT_PLAYER_NAME.getMessage(locale) + ">";
+        return "degraduj <" + Message.COMMAND_ARGUMENT_PLAYER_NAME.getMessage(locale) + ">";
     }
 
     @Override

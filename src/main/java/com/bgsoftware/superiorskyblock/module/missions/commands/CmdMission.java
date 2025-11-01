@@ -19,7 +19,7 @@ public class CmdMission implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("mission", "challenge");
+        return Collections.singletonList("zadanie");
     }
 
     @Override
@@ -29,7 +29,7 @@ public class CmdMission implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "mission complete <" + Message.COMMAND_ARGUMENT_MISSION_NAME.getMessage(locale) + ">";
+        return "zadanie ukoncz <" + Message.COMMAND_ARGUMENT_MISSION_NAME.getMessage(locale) + ">";
     }
 
     @Override
@@ -56,7 +56,7 @@ public class CmdMission implements ISuperiorCommand {
     public void execute(SuperiorSkyblockPlugin plugin, CommandSender sender, String[] args) {
         SuperiorPlayer superiorPlayer = plugin.getPlayers().getSuperiorPlayer(sender);
 
-        if (!args[1].equalsIgnoreCase("complete")) {
+        if (!args[1].equalsIgnoreCase("ukoncz")) {
             Locale locale = PlayerLocales.getLocale(sender);
             Message.COMMAND_USAGE.send(sender, plugin.getCommands().getLabel() + " " + getUsage(locale));
             return;
@@ -98,8 +98,8 @@ public class CmdMission implements ISuperiorCommand {
     public List<String> tabComplete(SuperiorSkyblockPlugin plugin, CommandSender sender, String[] args) {
         SuperiorPlayer superiorPlayer = plugin.getPlayers().getSuperiorPlayer(sender);
 
-        return args.length == 2 ? CommandTabCompletes.getCustomComplete(args[1], "complete") :
-                args.length == 3 && args[1].equalsIgnoreCase("complete") ?
+        return args.length == 2 ? CommandTabCompletes.getCustomComplete(args[1], "ukoncz") :
+                args.length == 3 && args[1].equalsIgnoreCase("ukoncz") ?
                         CommandTabCompletes.getMissions(plugin, args[2], mission ->
                                 mission.canComplete(superiorPlayer)) : Collections.emptyList();
     }

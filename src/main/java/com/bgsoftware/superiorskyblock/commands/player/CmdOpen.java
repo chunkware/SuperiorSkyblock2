@@ -10,13 +10,14 @@ import com.bgsoftware.superiorskyblock.core.messages.Message;
 import com.bgsoftware.superiorskyblock.island.privilege.IslandPrivileges;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class CmdOpen implements IPermissibleCommand {
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("open", "unlock");
+        return Collections.singletonList("otworz");
     }
 
     @Override
@@ -26,7 +27,7 @@ public class CmdOpen implements IPermissibleCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "open";
+        return "otworz";
     }
 
     @Override

@@ -9,12 +9,13 @@ import org.bukkit.command.CommandSender;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Arrays;
 
 public class CmdWarps implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("warps");
+        return Collections.singletonList("warpy");
     }
 
     @Override
@@ -24,7 +25,7 @@ public class CmdWarps implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "warps";
+        return "warpy";
     }
 
     @Override

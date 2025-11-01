@@ -13,6 +13,7 @@ import com.bgsoftware.superiorskyblock.island.IslandUtils;
 import com.bgsoftware.superiorskyblock.player.inventory.ClearActions;
 import org.bukkit.command.CommandSender;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class CmdLeave implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("leave");
+        return Collections.singletonList("opusc");
     }
 
     @Override
@@ -30,7 +31,7 @@ public class CmdLeave implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "leave";
+        return "opusc";
     }
 
     @Override

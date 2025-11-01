@@ -35,7 +35,7 @@ public class CmdAdminRankup implements IAdminIslandCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("rankup");
+        return Collections.singletonList("ulepsz");
     }
 
     @Override
@@ -45,7 +45,7 @@ public class CmdAdminRankup implements IAdminIslandCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "admin rankup <" +
+        return "admin ulepsz <" +
                 Message.COMMAND_ARGUMENT_PLAYER_NAME.getMessage(locale) + "/" +
                 Message.COMMAND_ARGUMENT_ISLAND_NAME.getMessage(locale) + "/" +
                 Message.COMMAND_ARGUMENT_ALL_ISLANDS.getMessage(locale) + "> <" +

@@ -53,7 +53,7 @@ public class MemberManageButton extends AbstractMenuViewButton<PlayerMenuView> {
                         plugin.getMenus().openConfirmBan(inventoryViewer, MenuViewWrapper.fromView(menuView), island, menuView.getSuperiorPlayer());
                     }
                 } else {
-                    plugin.getCommands().dispatchSubCommand(clickEvent.getWhoClicked(), "ban", menuView.getSuperiorPlayer().getName());
+                    plugin.getCommands().dispatchSubCommand(clickEvent.getWhoClicked(), "zablokuj", menuView.getSuperiorPlayer().getName());
                 }
             }
         },
@@ -72,7 +72,7 @@ public class MemberManageButton extends AbstractMenuViewButton<PlayerMenuView> {
                         plugin.getMenus().openConfirmKick(inventoryViewer, MenuViewWrapper.fromView(menuView), island, menuView.getSuperiorPlayer());
                     }
                 } else {
-                    plugin.getCommands().dispatchSubCommand(clickEvent.getWhoClicked(), "kick", menuView.getSuperiorPlayer().getName());
+                    plugin.getCommands().dispatchSubCommand(clickEvent.getWhoClicked(), "wyrzuc", menuView.getSuperiorPlayer().getName());
                 }
             }
         };

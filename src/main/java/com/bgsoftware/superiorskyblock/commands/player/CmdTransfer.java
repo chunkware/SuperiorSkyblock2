@@ -19,7 +19,7 @@ public class CmdTransfer implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("transfer", "leader", "leadership");
+        return Collections.singletonList("lider");
     }
 
     @Override
@@ -29,7 +29,7 @@ public class CmdTransfer implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "transfer <" + Message.COMMAND_ARGUMENT_PLAYER_NAME.getMessage(locale) + ">";
+        return "lider <" + Message.COMMAND_ARGUMENT_PLAYER_NAME.getMessage(locale) + ">";
     }
 
     @Override

@@ -13,12 +13,13 @@ import org.bukkit.command.CommandSender;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Arrays;
 
 public class CmdValues implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("values");
+        return Collections.singletonList("wartosc");
     }
 
     @Override
@@ -28,7 +29,7 @@ public class CmdValues implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "values [" +
+        return "wartosc [" +
                 Message.COMMAND_ARGUMENT_PLAYER_NAME.getMessage(locale) + "/" +
                 Message.COMMAND_ARGUMENT_ISLAND_NAME.getMessage(locale) + "]";
     }

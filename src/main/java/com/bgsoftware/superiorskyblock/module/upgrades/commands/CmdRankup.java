@@ -41,7 +41,7 @@ public class CmdRankup implements IPermissibleCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("rankup");
+        return Collections.singletonList("ulepsz");
     }
 
     @Override
@@ -51,7 +51,7 @@ public class CmdRankup implements IPermissibleCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "rankup <" + Message.COMMAND_ARGUMENT_UPGRADE_NAME.getMessage(locale) + ">";
+        return "ulepsz <" + Message.COMMAND_ARGUMENT_UPGRADE_NAME.getMessage(locale) + ">";
     }
 
     @Override
@@ -87,6 +87,8 @@ public class CmdRankup implements IPermissibleCommand {
     @Override
     public void execute(SuperiorSkyblockPlugin plugin, SuperiorPlayer superiorPlayer, Island island, String[] args) {
         Upgrade upgrade = CommandArguments.getUpgrade(plugin, superiorPlayer, args[1]);
+
+        Bukkit.getLogger().info("ulepszenie" + args[1]);
 
         if (upgrade == null)
             return;

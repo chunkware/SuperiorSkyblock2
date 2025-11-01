@@ -410,7 +410,7 @@ public enum Message {
                 }
 
                 for (BaseComponent baseComponent : baseComponents)
-                    baseComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + plugin.getCommands().getLabel() + " accept " + args[0]));
+                    baseComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + plugin.getCommands().getLabel() + " dolacz " + args[0]));
 
                 IMessageComponent messageComponent = ComplexMessageComponent.of(baseComponents);
                 if (messageComponent != null) {
@@ -947,18 +947,8 @@ public enum Message {
         File langFolder = new File(plugin.getDataFolder(), "lang");
 
         if (!langFolder.exists()) {
-            plugin.saveResource("lang/de-DE.yml", false);
             plugin.saveResource("lang/en-US.yml", false);
-            plugin.saveResource("lang/es-ES.yml", false);
-            plugin.saveResource("lang/fr-FR.yml", false);
-            plugin.saveResource("lang/it-IT.yml", false);
-            plugin.saveResource("lang/iw-IL.yml", false);
             plugin.saveResource("lang/pl-PL.yml", false);
-            plugin.saveResource("lang/pt-BR.yml", false);
-            plugin.saveResource("lang/ru-RU.yml", false);
-            plugin.saveResource("lang/tr-TR.yml", false);
-            plugin.saveResource("lang/vi-VN.yml", false);
-            plugin.saveResource("lang/zh-CN.yml", false);
         }
 
         int messagesAmount = 0;

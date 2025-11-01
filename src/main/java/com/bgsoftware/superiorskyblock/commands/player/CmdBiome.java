@@ -10,13 +10,14 @@ import com.bgsoftware.superiorskyblock.api.island.IslandPrivilege;
 import com.bgsoftware.superiorskyblock.api.wrappers.SuperiorPlayer;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class CmdBiome implements IPermissibleCommand {
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("biome", "setbiome");
+        return Collections.singletonList("ustawbiom");
     }
 
     @Override
@@ -26,7 +27,7 @@ public class CmdBiome implements IPermissibleCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "biome";
+        return "ustawbiom";
     }
 
     @Override

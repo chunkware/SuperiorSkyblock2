@@ -10,12 +10,13 @@ import org.bukkit.command.CommandSender;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Arrays;
 
 public class CmdTop implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("top");
+        return Collections.singletonList("ranking");
     }
 
     @Override
@@ -25,7 +26,7 @@ public class CmdTop implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "top";
+        return "ranking";
     }
 
     @Override

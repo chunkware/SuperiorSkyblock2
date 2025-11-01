@@ -14,6 +14,7 @@ import com.bgsoftware.superiorskyblock.player.PlayerLocales;
 import org.bukkit.command.CommandSender;
 
 import java.util.Collections;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class CmdHelp implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("help");
+        return Collections.singletonList("pomoc");
     }
 
     @Override
@@ -42,7 +43,7 @@ public class CmdHelp implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "help [" + Message.COMMAND_ARGUMENT_PAGE.getMessage(locale) + "]";
+        return "pomoc [" + Message.COMMAND_ARGUMENT_PAGE.getMessage(locale) + "]";
     }
 
     @Override

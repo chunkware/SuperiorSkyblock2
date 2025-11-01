@@ -13,13 +13,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 public class CmdFly implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("fly");
+        return Collections.singletonList("latanie");
     }
 
     @Override
@@ -29,7 +30,7 @@ public class CmdFly implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "fly";
+        return "latanie";
     }
 
     @Override

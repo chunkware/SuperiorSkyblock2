@@ -34,10 +34,10 @@ public class MemberRoleButton extends AbstractMenuViewButton<PlayerMenuView> {
         PlayerRole playerRole = plugin.getRoles().getPlayerRoleFromId(getTemplate().playerRoleId);
 
         if (playerRole.isLastRole()) {
-            plugin.getCommands().dispatchSubCommand(inventoryViewer, "transfer",
+            plugin.getCommands().dispatchSubCommand(inventoryViewer, "lider",
                     targetPlayer.getName());
         } else {
-            plugin.getCommands().dispatchSubCommand(inventoryViewer, "setrole",
+            plugin.getCommands().dispatchSubCommand(inventoryViewer, "ustawrole",
                     targetPlayer.getName() + " " + playerRole);
         }
     }

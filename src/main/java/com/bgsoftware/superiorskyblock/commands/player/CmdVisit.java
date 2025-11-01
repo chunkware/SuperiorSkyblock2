@@ -18,6 +18,7 @@ import org.bukkit.command.CommandSender;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Arrays;
 
 public class CmdVisit implements ISuperiorCommand {
 
@@ -25,7 +26,7 @@ public class CmdVisit implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("visit");
+        return Collections.singletonList("odwiedz");
     }
 
     @Override
@@ -35,7 +36,7 @@ public class CmdVisit implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "visit <" +
+        return "odwiedz <" +
                 Message.COMMAND_ARGUMENT_PLAYER_NAME.getMessage(locale) + "/" +
                 Message.COMMAND_ARGUMENT_ISLAND_NAME.getMessage(locale) + ">";
     }

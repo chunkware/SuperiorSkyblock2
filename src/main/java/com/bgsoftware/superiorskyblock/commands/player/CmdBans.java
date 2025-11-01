@@ -18,7 +18,7 @@ public class CmdBans implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("bans", "banlist");
+        return Collections.singletonList("blokady");
     }
 
     @Override
@@ -28,7 +28,7 @@ public class CmdBans implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "bans";
+        return "blokady";
     }
 
     @Override

@@ -27,7 +27,7 @@ public class CmdShow implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("show", "info");
+        return Collections.singletonList("pokaz");
     }
 
     @Override
@@ -37,7 +37,7 @@ public class CmdShow implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "show [" +
+        return "pokaz [" +
                 Message.COMMAND_ARGUMENT_PLAYER_NAME.getMessage(locale) + "/" +
                 Message.COMMAND_ARGUMENT_ISLAND_NAME.getMessage(locale) + "]";
     }

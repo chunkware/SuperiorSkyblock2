@@ -19,7 +19,7 @@ public class CmdDeposit implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("deposit");
+        return Collections.singletonList("wplac");
     }
 
     @Override
@@ -29,7 +29,7 @@ public class CmdDeposit implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "deposit <" + Message.COMMAND_ARGUMENT_AMOUNT.getMessage(locale) + ">";
+        return "wplac <" + Message.COMMAND_ARGUMENT_AMOUNT.getMessage(locale) + ">";
     }
 
     @Override
@@ -66,7 +66,7 @@ public class CmdDeposit implements ISuperiorCommand {
         BigDecimal moneyInBank = plugin.getProviders().getBankEconomyProvider().getBalance(superiorPlayer);
         BigDecimal amount = BigDecimal.valueOf(-1);
 
-        if (args[1].equalsIgnoreCase("all") || args[1].equals("*")) {
+        if (args[1].equalsIgnoreCase("wszystko") || args[1].equals("*")) {
             amount = moneyInBank;
         } else try {
             amount = BigDecimal.valueOf(Double.parseDouble(args[1]));

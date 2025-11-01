@@ -25,7 +25,7 @@ public class CmdPermissions implements IPermissibleCommand {
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("permissions", "perms", "setpermission", "setperm");
+        return Collections.singletonList("uprawnienia");
     }
 
     @Override
@@ -36,9 +36,9 @@ public class CmdPermissions implements IPermissibleCommand {
     @Override
     public String getUsage(java.util.Locale locale) {
         if (plugin.getSettings().isEditPlayerPermissions()) {
-            return "permissions [" + Message.COMMAND_ARGUMENT_PLAYER_NAME.getMessage(locale) + "] [reset]";
+            return "uprawnienia [" + Message.COMMAND_ARGUMENT_PLAYER_NAME.getMessage(locale) + "] [resetuj]";
         } else {
-            return "permissions [reset]";
+            return "uprawnienia [resetuj]";
         }
     }
 
@@ -122,15 +122,15 @@ public class CmdPermissions implements IPermissibleCommand {
         List<String> tabVariables = new LinkedList<>();
 
         if (args.length == 2) {
-            if ("reset".contains(args[1].toLowerCase(Locale.ENGLISH)))
-                tabVariables.add("reset");
+            if ("resetuj".contains(args[1].toLowerCase(Locale.ENGLISH)))
+                tabVariables.add("resetuj");
             if (plugin.getSettings().isEditPlayerPermissions()) {
                 tabVariables.addAll(CommandTabCompletes.getOnlinePlayers(plugin, args[1],
                         plugin.getSettings().isTabCompleteHideVanished()));
             }
         } else if (plugin.getSettings().isEditPlayerPermissions() && args.length == 3) {
-            if ("reset".contains(args[2].toLowerCase(Locale.ENGLISH)))
-                tabVariables.add("reset");
+            if ("resetuj".contains(args[2].toLowerCase(Locale.ENGLISH)))
+                tabVariables.add("resetuj");
         }
 
         return Collections.unmodifiableList(tabVariables);

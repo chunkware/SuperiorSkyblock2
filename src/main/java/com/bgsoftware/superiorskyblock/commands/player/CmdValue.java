@@ -20,12 +20,13 @@ import org.bukkit.inventory.ItemStack;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
+import java.util.Arrays;
 
 public class CmdValue implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("value");
+        return Collections.singletonList("blok");
     }
 
     @Override
@@ -35,7 +36,7 @@ public class CmdValue implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "value [" + Message.COMMAND_ARGUMENT_MATERIAL.getMessage(locale) + "]";
+        return "blok [" + Message.COMMAND_ARGUMENT_MATERIAL.getMessage(locale) + "]";
     }
 
     @Override

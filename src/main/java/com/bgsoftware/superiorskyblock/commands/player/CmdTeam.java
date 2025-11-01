@@ -26,7 +26,7 @@ public class CmdTeam implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("team", "showteam", "online");
+        return Collections.singletonList("grupa");
     }
 
     @Override
@@ -36,7 +36,7 @@ public class CmdTeam implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "team [" +
+        return "grupa [" +
                 Message.COMMAND_ARGUMENT_PLAYER_NAME.getMessage(locale) + "/" +
                 Message.COMMAND_ARGUMENT_ISLAND_NAME.getMessage(locale) + "]";
     }

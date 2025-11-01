@@ -13,12 +13,13 @@ import org.bukkit.entity.Player;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Arrays;
 
 public class CmdToggle implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("toggle");
+        return Collections.singletonList("przelacz");
     }
 
     @Override
@@ -28,7 +29,7 @@ public class CmdToggle implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "toggle <border/blocks>";
+        return "przelacz <bariera/listablokow>";
     }
 
     @Override
@@ -55,7 +56,7 @@ public class CmdToggle implements ISuperiorCommand {
     public void execute(SuperiorSkyblockPlugin plugin, CommandSender sender, String[] args) {
         SuperiorPlayer superiorPlayer = plugin.getPlayers().getSuperiorPlayer(sender);
 
-        if (args[1].equalsIgnoreCase("border")) {
+        if (args[1].equalsIgnoreCase("bariera")) {
             if (!superiorPlayer.hasPermission("superior.island.toggle.border")) {
                 Message.NO_COMMAND_PERMISSION.send(sender, "superior.island.toggle.border");
                 return;
@@ -74,7 +75,7 @@ public class CmdToggle implements ISuperiorCommand {
             try (ObjectsPools.Wrapper<Location> wrapper = ObjectsPools.LOCATION.obtain()) {
                 superiorPlayer.updateWorldBorder(plugin.getGrid().getIslandAt(((Player) sender).getLocation(wrapper.getHandle())));
             }
-        } else if (args[1].equalsIgnoreCase("blocks")) {
+        } else if (args[1].equalsIgnoreCase("listablokow")) {
             if (!superiorPlayer.hasPermission("superior.island.toggle.blocks")) {
                 Message.NO_COMMAND_PERMISSION.send(sender, "superior.island.toggle.blocks");
                 return;
@@ -99,7 +100,7 @@ public class CmdToggle implements ISuperiorCommand {
     @Override
     public List<String> tabComplete(SuperiorSkyblockPlugin plugin, CommandSender sender, String[] args) {
         return args.length == 2 ? CommandTabCompletes.getCustomComplete(args[1], var ->
-                sender.hasPermission("superior.island.toggle." + var), "border", "blocks") : Collections.emptyList();
+                sender.hasPermission("superior.island.toggle." + var), "bariera", "listablokow") : Collections.emptyList();
     }
 
 }

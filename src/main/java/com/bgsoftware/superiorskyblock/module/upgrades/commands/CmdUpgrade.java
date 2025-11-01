@@ -18,7 +18,7 @@ public class CmdUpgrade implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("upgrade", "upgrades");
+        return Collections.singletonList("ulepszenia");
     }
 
     @Override
@@ -28,7 +28,7 @@ public class CmdUpgrade implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "upgrade";
+        return "ulepszenia";
     }
 
     @Override

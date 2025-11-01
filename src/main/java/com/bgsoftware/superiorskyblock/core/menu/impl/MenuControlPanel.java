@@ -46,11 +46,11 @@ public class MenuControlPanel extends AbstractMenu<IslandMenuView, IslandViewArg
         YamlConfiguration cfg = menuParseResult.getConfig();
         MenuLayout.Builder<IslandMenuView> patternBuilder = menuParseResult.getLayoutBuilder();
 
-        patternBuilder.mapButtons(MenuParserImpl.getInstance().parseButtonSlots(cfg, "members", menuPatternSlots),
+        patternBuilder.mapButtons(MenuParserImpl.getInstance().parseButtonSlots(cfg, "czlonkowie", menuPatternSlots),
                 new ControlPanelButton.Builder().setAction(ControlPanelButton.ControlPanelAction.OPEN_MEMBERS));
-        patternBuilder.mapButtons(MenuParserImpl.getInstance().parseButtonSlots(cfg, "settings", menuPatternSlots),
+        patternBuilder.mapButtons(MenuParserImpl.getInstance().parseButtonSlots(cfg, "ustawienia", menuPatternSlots),
                 new ControlPanelButton.Builder().setAction(ControlPanelButton.ControlPanelAction.OPEN_SETTINGS));
-        patternBuilder.mapButtons(MenuParserImpl.getInstance().parseButtonSlots(cfg, "visitors", menuPatternSlots),
+        patternBuilder.mapButtons(MenuParserImpl.getInstance().parseButtonSlots(cfg, "goscie", menuPatternSlots),
                 new ControlPanelButton.Builder().setAction(ControlPanelButton.ControlPanelAction.OPEN_VISITORS));
 
         return new MenuControlPanel(menuParseResult);
@@ -87,16 +87,16 @@ public class MenuControlPanel extends AbstractMenu<IslandMenuView, IslandViewArg
         char settingsChar = AbstractMenuLayout.BUTTON_SYMBOLS[charCounter++];
         char visitorsChar = AbstractMenuLayout.BUTTON_SYMBOLS[charCounter++];
 
-        MenuConverter.convertItem(cfg.getConfigurationSection("main-panel.members"), patternChars, membersChar,
+        MenuConverter.convertItem(cfg.getConfigurationSection("main-panel.czlonkowie"), patternChars, membersChar,
                 itemsSection, commandsSection, soundsSection);
-        MenuConverter.convertItem(cfg.getConfigurationSection("main-panel.settings"), patternChars, settingsChar,
+        MenuConverter.convertItem(cfg.getConfigurationSection("main-panel.ustawienia"), patternChars, settingsChar,
                 itemsSection, commandsSection, soundsSection);
-        MenuConverter.convertItem(cfg.getConfigurationSection("main-panel.visitors"), patternChars, visitorsChar,
+        MenuConverter.convertItem(cfg.getConfigurationSection("main-panel.goscie"), patternChars, visitorsChar,
                 itemsSection, commandsSection, soundsSection);
 
-        newMenu.set("members", membersChar + "");
-        newMenu.set("settings", settingsChar + "");
-        newMenu.set("visitors", visitorsChar + "");
+        newMenu.set("czlonkowie", membersChar + "");
+        newMenu.set("ustawienia", settingsChar + "");
+        newMenu.set("goscie", visitorsChar + "");
 
         newMenu.set("pattern", MenuConverter.buildPattern(size, patternChars,
                 AbstractMenuLayout.BUTTON_SYMBOLS[charCounter]));

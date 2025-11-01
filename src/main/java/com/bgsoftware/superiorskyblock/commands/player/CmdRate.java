@@ -12,6 +12,7 @@ import com.bgsoftware.superiorskyblock.core.menu.view.MenuViewWrapper;
 import com.bgsoftware.superiorskyblock.core.messages.Message;
 import org.bukkit.command.CommandSender;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class CmdRate implements ISuperiorCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("rate");
+        return Collections.singletonList("ocen");
     }
 
     @Override
@@ -29,7 +30,7 @@ public class CmdRate implements ISuperiorCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "rate [" +
+        return "ocen [" +
                 Message.COMMAND_ARGUMENT_PLAYER_NAME.getMessage(locale) + "/" +
                 Message.COMMAND_ARGUMENT_ISLAND_NAME.getMessage(locale) + "]";
     }

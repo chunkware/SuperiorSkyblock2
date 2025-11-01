@@ -24,6 +24,7 @@ allprojects {
         }
     }
 
+
     repositories {
         maven { url 'https://repo.bg-software.com/repository/nms/' }
         maven { url 'https://repo.bg-software.com/repository/api/' }

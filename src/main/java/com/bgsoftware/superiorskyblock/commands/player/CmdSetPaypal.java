@@ -13,12 +13,13 @@ import com.bgsoftware.superiorskyblock.island.privilege.IslandPrivileges;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Arrays;
 
 public class CmdSetPaypal implements IPermissibleCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("setpaypal");
+        return Collections.singletonList("ustawpaypal");
     }
 
     @Override
@@ -28,7 +29,7 @@ public class CmdSetPaypal implements IPermissibleCommand {
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "setpaypal <" + Message.COMMAND_ARGUMENT_EMAIL.getMessage(locale) + ">";
+        return "ustawpaypal <" + Message.COMMAND_ARGUMENT_EMAIL.getMessage(locale) + ">";
     }
 
     @Override
