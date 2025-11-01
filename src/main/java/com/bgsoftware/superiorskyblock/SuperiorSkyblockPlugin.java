@@ -82,6 +82,7 @@ import com.bgsoftware.superiorskyblock.service.ServicesHandler;
 import com.bgsoftware.superiorskyblock.world.Dimensions;
 import com.bgsoftware.superiorskyblock.world.WorldGenerator;
 import com.bgsoftware.superiorskyblock.world.chunk.ChunksProvider;
+import com.bgsoftware.superiorskyblock.world.entity.EntityCategories;
 import com.bgsoftware.superiorskyblock.world.schematic.SchematicsManagerImpl;
 import com.bgsoftware.superiorskyblock.world.schematic.container.DefaultSchematicsContainer;
 import org.bstats.bukkit.Metrics;
@@ -178,7 +179,7 @@ public class SuperiorSkyblockPlugin extends JavaPlugin implements SuperiorSkyblo
         Runtime.getRuntime().addShutdownHook(new ShutdownTask(this));
 
         IslandPrivileges.registerPrivileges();
-        SortingTypes.registerSortingTypes();
+        SortingTypes.registerSortingTypes(this);
         IslandFlags.registerFlags();
         ClearActions.registerActions();
         RespawnActions.registerActions();

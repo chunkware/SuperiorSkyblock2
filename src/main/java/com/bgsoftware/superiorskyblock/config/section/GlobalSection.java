@@ -2,7 +2,9 @@ package com.bgsoftware.superiorskyblock.config.section;
 
 import com.bgsoftware.superiorskyblock.api.enums.TopIslandMembersSorting;
 import com.bgsoftware.superiorskyblock.api.handlers.BlockValuesManager;
+import com.bgsoftware.superiorskyblock.api.island.SortingType;
 import com.bgsoftware.superiorskyblock.api.key.Key;
+import com.bgsoftware.superiorskyblock.api.key.KeySet;
 import com.bgsoftware.superiorskyblock.api.objects.Pair;
 import com.bgsoftware.superiorskyblock.api.player.inventory.ClearAction;
 import com.bgsoftware.superiorskyblock.api.player.respawn.RespawnAction;
@@ -53,8 +55,12 @@ public class GlobalSection extends SettingsContainerHolder {
         return getContainer().autoBlocksTracking;
     }
 
-    public String getIslandTopOrder() {
+    public SortingType getIslandTopOrder() {
         return getContainer().islandTopOrder;
+    }
+
+    public SortingType getGlobalWarpsOrder() {
+        return getContainer().globalWarpsOrder;
     }
 
     public boolean isCoopMembers() {
@@ -341,8 +347,8 @@ public class GlobalSection extends SettingsContainerHolder {
         return getContainer().dropsUpgradePlayersMultiply;
     }
 
-    public long getProtectedMessageDelay() {
-        return getContainer().protectedMessageDelay;
+    public Map<String, Long> getMessageDelays() {
+        return getContainer().messageDelays;
     }
 
     public boolean isWarpCategories() {
@@ -407,6 +413,10 @@ public class GlobalSection extends SettingsContainerHolder {
 
     public boolean isCacheSchematics() {
         return getContainer().cacheSchematics;
+    }
+
+    public Map<String, KeySet> getEntityCategories() {
+        return getContainer().entityCategories;
     }
 
 }

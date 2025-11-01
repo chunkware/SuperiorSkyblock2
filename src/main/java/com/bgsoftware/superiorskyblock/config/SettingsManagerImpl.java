@@ -5,7 +5,9 @@ import com.bgsoftware.superiorskyblock.SuperiorSkyblockPlugin;
 import com.bgsoftware.superiorskyblock.api.config.SettingsManager;
 import com.bgsoftware.superiorskyblock.api.enums.TopIslandMembersSorting;
 import com.bgsoftware.superiorskyblock.api.handlers.BlockValuesManager;
+import com.bgsoftware.superiorskyblock.api.island.SortingType;
 import com.bgsoftware.superiorskyblock.api.key.Key;
+import com.bgsoftware.superiorskyblock.api.key.KeySet;
 import com.bgsoftware.superiorskyblock.api.objects.Pair;
 import com.bgsoftware.superiorskyblock.api.player.inventory.ClearAction;
 import com.bgsoftware.superiorskyblock.api.player.respawn.RespawnAction;
@@ -27,6 +29,7 @@ import com.bgsoftware.superiorskyblock.core.Manager;
 import com.bgsoftware.superiorskyblock.core.errors.ManagerLoadException;
 import com.bgsoftware.superiorskyblock.core.events.plugin.PluginEventsFactory;
 import com.bgsoftware.superiorskyblock.core.logging.Log;
+import com.bgsoftware.superiorskyblock.island.top.SortingComparators;
 import com.bgsoftware.superiorskyblock.player.inventory.ClearActions;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -48,7 +51,7 @@ public class SettingsManagerImpl extends Manager implements SettingsManager {
     private static final String[] IGNORED_SECTIONS = new String[]{
             "config.yml", "ladder", "commands-cooldown", "containers", "event-commands", "command-aliases",
             "island-previews.locations", "default-values.block-limits", "default-values.entity-limits",
-            "default-values.role-limits", "stacked-blocks.limits", "default-values.generator"
+            "default-values.role-limits", "stacked-blocks.limits", "default-values.generator", "message-delays"
     };
 
     private final GlobalSection global = new GlobalSection();
@@ -154,7 +157,12 @@ public class SettingsManagerImpl extends Manager implements SettingsManager {
 
     @Override
     public String getIslandTopOrder() {
-        return this.global.getIslandTopOrder();
+        return this.global.getIslandTopOrder().getName();
+    }
+
+    @Override
+    public String getGlobalWarpsOrder() {
+        return this.global.getGlobalWarpsOrder().getName();
     }
 
     @Override
@@ -581,8 +589,14 @@ public class SettingsManagerImpl extends Manager implements SettingsManager {
     }
 
     @Override
+    @Deprecated
     public long getProtectedMessageDelay() {
-        return this.global.getProtectedMessageDelay();
+        return this.global.getMessageDelays().getOrDefault("ISLAND_PROTECTED", 0L);
+    }
+
+    @Override
+    public Map<String, Long> getMessageDelays() {
+        return this.global.getMessageDelays();
     }
 
     @Override
@@ -665,6 +679,11 @@ public class SettingsManagerImpl extends Manager implements SettingsManager {
         return this.global.isCacheSchematics();
     }
 
+    @Override
+    public Map<String, KeySet> getEntityCategories() {
+        return this.global.getEntityCategories();
+    }
+
     public void updateValue(String path, Object value) throws IOException {
         File file = new File(plugin.getDataFolder(), "config.yml");
 
@@ -705,6 +724,17 @@ public class SettingsManagerImpl extends Manager implements SettingsManager {
     }
 
     private void convertData(YamlConfiguration cfg) {
+        if (!cfg.isConfigurationSection("entity-categories")) {
+            cfg.createSection("entity-categories");
+        }
+        if (cfg.get("protected-message-delay") instanceof Number) {
+            long delay = cfg.getLong("protected-message-delay") * 50;
+            cfg.set("message-delays.ISLAND_PROTECTED", delay);
+            cfg.set("message-delays.ISLAND_PROTECTED_OPPED", delay);
+            cfg.set("message-delays.SPAWN_PROTECTED", delay);
+            cfg.set("message-delays.SPAWN_PROTECTED_OPPED", delay);
+            cfg.set("protected-message-delay", null);
+        }
         if (cfg.isConfigurationSection("preview-islands")) {
             cfg.set("island-previews.locations", cfg.getConfigurationSection("preview-islands"));
             cfg.set("preview-islands", null);
