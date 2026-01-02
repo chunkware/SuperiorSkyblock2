@@ -1,4 +1,4 @@
-package com.bgsoftware.superiorskyblock.commands.admin;
+package com.bgsoftware.superiorskyblock.module.upgrades.commands;
 
 import com.bgsoftware.common.annotations.Nullable;
 import com.bgsoftware.superiorskyblock.SuperiorSkyblockPlugin;
@@ -20,31 +20,31 @@ import org.bukkit.command.CommandSender;
 import java.util.Collections;
 import java.util.List;
 
-public class CmdAdminAddBlockLimit implements IAdminIslandCommand {
+public class CmdAdminSetEntityLimit implements IAdminIslandCommand {
 
     @Override
     public List<String> getAliases() {
-        return Collections.singletonList("addblocklimit");
+        return Collections.singletonList("setentitylimit");
     }
 
     @Override
     public String getPermission() {
-        return "superior.admin.addblocklimit";
+        return "superior.admin.setentitylimit";
     }
 
     @Override
     public String getUsage(java.util.Locale locale) {
-        return "admin addblocklimit <" +
+        return "admin setentitylimit <" +
                 Message.COMMAND_ARGUMENT_PLAYER_NAME.getMessage(locale) + "/" +
                 Message.COMMAND_ARGUMENT_ISLAND_NAME.getMessage(locale) + "/" +
                 Message.COMMAND_ARGUMENT_ALL_ISLANDS.getMessage(locale) + "> <" +
-                Message.COMMAND_ARGUMENT_MATERIAL.getMessage(locale) + "> <" +
+                Message.COMMAND_ARGUMENT_ENTITY.getMessage(locale) + "> <" +
                 Message.COMMAND_ARGUMENT_LIMIT.getMessage(locale) + ">";
     }
 
     @Override
     public String getDescription(java.util.Locale locale) {
-        return Message.COMMAND_DESCRIPTION_ADMIN_ADD_BLOCK_LIMIT.getMessage(locale);
+        return Message.COMMAND_DESCRIPTION_ADMIN_SET_ENTITY_LIMIT.getMessage(locale);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class CmdAdminAddBlockLimit implements IAdminIslandCommand {
 
     @Override
     public void execute(SuperiorSkyblockPlugin plugin, CommandSender sender, @Nullable SuperiorPlayer targetPlayer, List<Island> islands, String[] args) {
-        Key key = Keys.ofMaterialAndData(args[3]);
+        Key entityKey = Keys.ofEntityType(args[3]);
 
         NumberArgument<Integer> arguments = CommandArguments.getLimit(sender, args[4]);
 
@@ -81,10 +81,10 @@ public class CmdAdminAddBlockLimit implements IAdminIslandCommand {
         int islandsChangedCount = 0;
 
         for (Island island : islands) {
-            PluginEvent<PluginEventArgs.IslandChangeBlockLimit> event =
-                    PluginEventsFactory.callIslandChangeBlockLimitEvent(island, sender, key, island.getBlockLimit(key) + limit);
+            PluginEvent<PluginEventArgs.IslandChangeEntityLimit> event = PluginEventsFactory.callIslandChangeEntityLimitEvent(
+                    island, sender, entityKey, limit);
             if (!event.isCancelled()) {
-                island.setBlockLimit(key, event.getArgs().blockLimit);
+                island.setEntityLimit(entityKey, event.getArgs().entityLimit);
                 ++islandsChangedCount;
             }
         }
@@ -93,15 +93,16 @@ public class CmdAdminAddBlockLimit implements IAdminIslandCommand {
             return;
 
         if (islandsChangedCount > 1)
-            Message.CHANGED_BLOCK_LIMIT_ALL.send(sender, Formatters.CAPITALIZED_FORMATTER.format(key.getGlobalKey()));
+            Message.CHANGED_ENTITY_LIMIT_ALL.send(sender, Formatters.CAPITALIZED_FORMATTER.format(entityKey.getGlobalKey()));
         else if (targetPlayer == null)
-            Message.CHANGED_BLOCK_LIMIT_NAME.send(sender, Formatters.CAPITALIZED_FORMATTER.format(key.getGlobalKey()), islands.get(0).getName());
+            Message.CHANGED_ENTITY_LIMIT_NAME.send(sender, Formatters.CAPITALIZED_FORMATTER.format(entityKey.getGlobalKey()), islands.get(0).getName());
         else
-            Message.CHANGED_BLOCK_LIMIT.send(sender, Formatters.CAPITALIZED_FORMATTER.format(key.getGlobalKey()), targetPlayer.getName());
+            Message.CHANGED_ENTITY_LIMIT.send(sender, Formatters.CAPITALIZED_FORMATTER.format(entityKey.getGlobalKey()), targetPlayer.getName());
     }
 
     @Override
     public List<String> adminTabComplete(SuperiorSkyblockPlugin plugin, CommandSender sender, Island island, String[] args) {
-        return args.length == 4 ? CommandTabCompletes.getMaterials(args[3]) : Collections.emptyList();
+        return args.length == 4 ? CommandTabCompletes.getEntitiesForLimit(args[3]) : Collections.emptyList();
     }
+
 }

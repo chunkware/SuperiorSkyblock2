@@ -82,6 +82,8 @@ public class RegionManagerServiceImpl implements RegionManagerService, IService 
     @Nullable
     private static final Material OMINOUS_TRIAL_KEY = EnumHelper.getEnum(Material.class, "OMINOUS_TRIAL_KEY");
     @Nullable
+    private static final EntityType ALLAY_TYPE = EnumHelper.getEnum(EntityType.class, "ALLAY");
+    @Nullable
     private static final EntityType AXOLOTL_TYPE = EnumHelper.getEnum(EntityType.class, "AXOLOTL");
     @Nullable
     private static final EntityType LLAMA_TYPE = EnumHelper.getEnum(EntityType.class, "LLAMA");
@@ -89,6 +91,8 @@ public class RegionManagerServiceImpl implements RegionManagerService, IService 
     private static final EntityType HAPPY_GHAST_TYPE = EnumHelper.getEnum(EntityType.class, "HAPPY_GHAST");
     @Nullable
     private static final EntityType PARROT_TYPE = EnumHelper.getEnum(EntityType.class, "PARROT");
+    @Nullable
+    private static final EntityType COPPER_GOLEM_TYPE = EnumHelper.getEnum(EntityType.class, "COPPER_GOLEM");
 
     private static final int MAX_PICKUP_DISTANCE = 1;
     private static EnumerateSet<IslandPrivilege> WORLD_PERMISSIONS_CACHE;
@@ -204,17 +208,12 @@ public class RegionManagerServiceImpl implements RegionManagerService, IService 
 
             IslandPrivilege islandPrivilege;
 
-            if (spawnType != EntityType.UNKNOWN) {
-                EntityCategory entityCategory = EntityCategory.getEntityCategory(Keys.of(spawnType));
-                if (entityCategory == null)
-                    return InteractionResult.SUCCESS;
-                islandPrivilege = entityCategory.getSpawnPrivilege();
-                if (islandPrivilege == null)
-                    return InteractionResult.SUCCESS;
-            } else if (usedItem != null && Materials.isMinecart(usedItem.getType()) ? Materials.isRail(blockType) : Materials.isBoat(blockType)) {
+            if (usedItem != null && Materials.isMinecart(usedItem.getType()) ? Materials.isRail(blockType) : Materials.isBoat(blockType)) {
                 islandPrivilege = IslandPrivileges.MINECART_PLACE;
             } else if (Materials.isChest(blockType)) {
                 islandPrivilege = IslandPrivileges.CHEST_ACCESS;
+            } else if (blockType == LECTERN) {
+                islandPrivilege = IslandPrivileges.PICKUP_LECTERN_BOOK;
             } else if (blockState instanceof InventoryHolder) {
                 islandPrivilege = IslandPrivileges.USE;
             } else if (usedItem != null && blockType == VAULT && (usedItem.getType() == TRIAL_KEY || usedItem.getType() == OMINOUS_TRIAL_KEY)) {
@@ -233,8 +232,13 @@ public class RegionManagerServiceImpl implements RegionManagerService, IService 
                 islandPrivilege = IslandPrivileges.BREAK;
             } else if (blockType == Material.PUMPKIN) {
                 islandPrivilege = IslandPrivileges.BREAK;
-            } else if (blockType == LECTERN) {
-                islandPrivilege = IslandPrivileges.PICKUP_LECTERN_BOOK;
+            } else if (spawnType != EntityType.UNKNOWN) {
+                EntityCategory entityCategory = EntityCategory.getEntityCategory(Keys.of(spawnType));
+                if (entityCategory == null) {
+                    islandPrivilege = IslandPrivileges.INTERACT;
+                } else {
+                    islandPrivilege = Optional.ofNullable(entityCategory.getSpawnPrivilege()).orElse(IslandPrivileges.INTERACT);
+                }
             } else {
                 islandPrivilege = IslandPrivileges.INTERACT;
             }
@@ -298,6 +302,13 @@ public class RegionManagerServiceImpl implements RegionManagerService, IService 
             } else if (BukkitEntities.isHorse(entity)) {
                 islandPrivilege = IslandPrivileges.HORSE_INTERACT;
                 closeInventory = true;
+            } else if (BukkitEntities.isNautilus(entityType)) {
+                islandPrivilege = IslandPrivileges.NAUTILUS_INTERACT;
+                closeInventory = true;
+            } else if (entityType == COPPER_GOLEM_TYPE) {
+                islandPrivilege = IslandPrivileges.COPPER_GOLEM_INTERACT;
+            } else if (entityType == ALLAY_TYPE) {
+                islandPrivilege = IslandPrivileges.ALLAY_INTERACT;
             } else if (usedItemType == Material.FLINT_AND_STEEL && entity instanceof Creeper) {
                 islandPrivilege = IslandPrivileges.IGNITE_CREEPER;
             } else if (usedItemType == Material.WATER_BUCKET && entityType == AXOLOTL_TYPE && ServerVersion.isAtLeast(ServerVersion.v1_17)) {
@@ -391,7 +402,8 @@ public class RegionManagerServiceImpl implements RegionManagerService, IService 
             return InteractionResult.SUCCESS;
 
         IslandPrivilege islandPrivilege = BukkitEntities.isHorse(vehicle) ? IslandPrivileges.HORSE_INTERACT :
-                vehicle instanceof Animals ? IslandPrivileges.ENTITY_RIDE : IslandPrivileges.MINECART_ENTER;
+                BukkitEntities.isNautilus(vehicle.getType()) ? IslandPrivileges.NAUTILUS_INTERACT :
+                        vehicle instanceof Animals ? IslandPrivileges.ENTITY_RIDE : IslandPrivileges.MINECART_ENTER;
 
         try (ObjectsPools.Wrapper<Location> wrapper = ObjectsPools.LOCATION.obtain()) {
             Location entityLocation = vehicle.getLocation(wrapper.getHandle());

@@ -158,11 +158,10 @@ public enum Materials {
                 materialTags.add(Tag.RAIL);
             if (materialName.contains("MINECART"))
                 materialTags.add(Tag.MINECART);
-            if (material == Material.CHEST || material == Material.ENDER_CHEST ||
-                    material == Material.TRAPPED_CHEST || materialName.contains("SHULKER_BOX") ||
-                    materialName.equals("BARREL"))
+            if (material == Material.CHEST || materialName.endsWith("_CHEST") ||
+                    materialName.contains("SHULKER_BOX") || materialName.equals("BARREL"))
                 materialTags.add(Tag.CHEST);
-            if (materialName.contains("BOAT"))
+            if (materialName.contains("BOAT") || materialName.contains("_RAFT"))
                 materialTags.add(Tag.BOAT);
             if (materialName.contains("LAVA"))
                 materialTags.add(Tag.LAVA);

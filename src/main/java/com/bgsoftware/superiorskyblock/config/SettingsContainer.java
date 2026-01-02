@@ -94,6 +94,7 @@ public class SettingsContainer {
     public final Int2IntMapView defaultRoleLimits;
     public final Map<PotionEffectType, Integer> defaultIslandEffects;
     public final int islandsHeight;
+    public final int seaLevelHeight;
     public final boolean worldBordersEnabled;
     public final boolean stackedBlocksEnabled;
     public final KeySet whitelistedStackedBlocks;
@@ -103,7 +104,7 @@ public class SettingsContainer {
     public final boolean stackedBlocksAutoPickup;
     public final boolean stackedBlocksMenuEnabled;
     public final String stackedBlocksMenuTitle;
-    public final String islandLevelFormula;
+    public final String blockLevelFormula;
     public final boolean roundedIslandLevel;
     public final RoundingMode islandLevelRoundingMode;
     public final boolean autoBlocksTracking;
@@ -154,6 +155,7 @@ public class SettingsContainer {
     public final boolean islandNamesColorSupport;
     public final boolean islandNamesIslandTop;
     public final boolean islandNamesPreventPlayerNames;
+    public final boolean islandNamesAnnounceChangeToAll;
     public final boolean teleportOnCreate;
     public final boolean teleportOnJoin;
     public final boolean teleportOnKick;
@@ -306,7 +308,7 @@ public class SettingsContainer {
         stackedBlocksAutoPickup = config.getBoolean("stacked-blocks.auto-collect", false);
         stackedBlocksMenuEnabled = config.getBoolean("stacked-blocks.deposit-menu.enabled", true);
         stackedBlocksMenuTitle = Formatters.COLOR_FORMATTER.format(config.getString("stacked-blocks.deposit-menu.title", "&lDeposit Blocks"));
-        islandLevelFormula = config.getString("island-level-formula", "{} / 2");
+        blockLevelFormula = config.getString("block-level-formula", "{} / 2");
         roundedIslandLevel = config.getBoolean("rounded-island-level", false);
         islandLevelRoundingMode = Optional.ofNullable(EnumHelper.getEnum(RoundingMode.class,
                         config.getString("island-level-rounding-mode").toUpperCase(Locale.ENGLISH)))
@@ -385,6 +387,7 @@ public class SettingsContainer {
         }
 
         worldsDifficulty = config.getString("worlds.difficulty", "EASY").toUpperCase(Locale.ENGLISH);
+        seaLevelHeight = config.getInt("worlds.sea-level-height", 100);
         spawnLocation = config.getString("spawn.location", "SuperiorWorld, 0, 100, 0, 0, 0");
         spawnProtection = config.getBoolean("spawn.protection", true);
         spawnSettings = Collections.unmodifiableList(new LinkedList<>(config.getStringList("spawn.settings")
@@ -423,6 +426,7 @@ public class SettingsContainer {
         islandNamesColorSupport = config.getBoolean("island-names.color-support", true);
         islandNamesIslandTop = config.getBoolean("island-names.island-top", true);
         islandNamesPreventPlayerNames = config.getBoolean("island-names.prevent-player-names", true);
+        islandNamesAnnounceChangeToAll = config.getBoolean("island-names.announce-change-to-all", true);
         teleportOnCreate = config.getBoolean("teleport-on-create", true);
         teleportOnJoin = config.getBoolean("teleport-on-join", false);
         teleportOnKick = config.getBoolean("teleport-on-kick", true);
@@ -569,7 +573,7 @@ public class SettingsContainer {
         if (config.isConfigurationSection("island-previews.locations")) {
             for (String schematic : config.getConfigurationSection("island-previews.locations").getKeys(false)) {
                 try {
-                    islandPreviewsLocations.put(schematic.toLowerCase(Locale.ENGLISH), Serializers.LOCATION_SERIALIZER
+                    islandPreviewsLocations.put(schematic.toLowerCase(Locale.ENGLISH), Serializers.LOCATION_SPACED_CENTERED_SERIALIZER
                             .deserialize(config.getString("island-previews.locations." + schematic)));
                 } catch (Exception error) {
                     Log.warnFromFile("config.yml", "Cannot deserialize island preview for ", schematic, ", skipping...");

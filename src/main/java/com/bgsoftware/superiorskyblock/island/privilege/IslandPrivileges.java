@@ -3,8 +3,10 @@ package com.bgsoftware.superiorskyblock.island.privilege;
 import com.bgsoftware.common.annotations.NotNull;
 import com.bgsoftware.common.annotations.Nullable;
 import com.bgsoftware.superiorskyblock.api.island.IslandPrivilege;
+import com.bgsoftware.superiorskyblock.core.EnumHelper;
 import com.bgsoftware.superiorskyblock.core.ServerVersion;
 import com.bgsoftware.superiorskyblock.core.formatting.Formatters;
+import org.bukkit.entity.EntityType;
 
 import java.util.Comparator;
 import java.util.Locale;
@@ -13,6 +15,7 @@ import java.util.Objects;
 public class IslandPrivileges {
 
     public static final IslandPrivilege ALL = register("ALL");
+    public static final IslandPrivilege ALLAY_INTERACT = register("ALLAY_INTERACT", ServerVersion.isAtLeast(ServerVersion.v1_19));
     public static final IslandPrivilege ANIMAL_BREED = register("ANIMAL_BREED");
     public static final IslandPrivilege ANIMAL_DAMAGE = register("ANIMAL_DAMAGE");
     public static final IslandPrivilege ANIMAL_SHEAR = register("ANIMAL_SHEAR");
@@ -27,6 +30,7 @@ public class IslandPrivileges {
     public static final IslandPrivilege CLOSE_BYPASS = register("CLOSE_BYPASS");
     public static final IslandPrivilege CLOSE_ISLAND = register("CLOSE_ISLAND", IslandPrivilege.Type.COMMAND);
     public static final IslandPrivilege COOP_MEMBER = register("COOP_MEMBER", IslandPrivilege.Type.COMMAND);
+    public static final IslandPrivilege COPPER_GOLEM_INTERACT = register("COPPER_GOLEM_INTERACT", EnumHelper.getEnum(EntityType.class, "COPPER_GOLEM") != null);
     public static final IslandPrivilege DELETE_WARP = register("DELETE_WARP", IslandPrivilege.Type.COMMAND);
     public static final IslandPrivilege DEMOTE_MEMBERS = register("DEMOTE_MEMBERS", IslandPrivilege.Type.COMMAND);
     public static final IslandPrivilege DEPOSIT_MONEY = register("DEPOSIT_MONEY", IslandPrivilege.Type.COMMAND);
@@ -56,6 +60,7 @@ public class IslandPrivileges {
     public static final IslandPrivilege MINECART_PLACE = register("MINECART_PLACE");
     public static final IslandPrivilege MONSTER_DAMAGE = register("MONSTER_DAMAGE");
     public static final IslandPrivilege MONSTER_SPAWN = register("MONSTER_SPAWN");
+    public static final IslandPrivilege NAUTILUS_INTERACT = register("NAUTILUS_INTERACT", EnumHelper.getEnum(EntityType.class, "NAUTILUS") != null);
     public static final IslandPrivilege NAME_ENTITY = register("NAME_ENTITY");
     public static final IslandPrivilege OPEN_ISLAND = register("OPEN_ISLAND", IslandPrivilege.Type.COMMAND);
     public static final IslandPrivilege PAINTING = register("PAINTING");

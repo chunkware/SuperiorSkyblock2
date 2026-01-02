@@ -38,7 +38,7 @@ import com.bgsoftware.superiorskyblock.api.wrappers.WorldPosition;
 import com.bgsoftware.superiorskyblock.core.ChunkPosition;
 import com.bgsoftware.superiorskyblock.core.IslandArea;
 import com.bgsoftware.superiorskyblock.core.LazyReference;
-import com.bgsoftware.superiorskyblock.core.SBlockPosition;
+import com.bgsoftware.superiorskyblock.core.SWorldPosition;
 import com.bgsoftware.superiorskyblock.core.SequentialListBuilder;
 import com.bgsoftware.superiorskyblock.core.WorldInfoImpl;
 import com.bgsoftware.superiorskyblock.core.collections.EnumerateSet;
@@ -133,7 +133,7 @@ public class SpawnIsland implements Island {
         }
     };
 
-    private final BlockPosition center;
+    private final WorldPosition center;
     private final World spawnWorld;
     private final WorldInfo spawnWorldInfo;
     private final int islandSize;
@@ -144,7 +144,7 @@ public class SpawnIsland implements Island {
 
     public SpawnIsland() throws ManagerLoadException {
         String spawnLocation = plugin.getSettings().getSpawn().getLocation();
-        Location centerLocation = Serializers.LOCATION_SPACED_SERIALIZER.deserialize(spawnLocation);
+        Location centerLocation = Serializers.LOCATION_SPACED_CENTERED_SERIALIZER.deserialize(spawnLocation);
         if (centerLocation == null) {
             throw new ManagerLoadException("The spawn location could not be parsed", ManagerLoadException.ErrorLevel.SERVER_SHUTDOWN);
         }
@@ -161,8 +161,8 @@ public class SpawnIsland implements Island {
 
         this.islandSize = plugin.getSettings().getSpawn().getSize();
 
-        this.center = SBlockPosition.of(centerLocation);
-        this.islandArea.update(this.center, this.islandSize);
+        this.center = SWorldPosition.of(centerLocation);
+        this.islandArea.update(this.center.toBlockPosition(), this.islandSize);
         this.spawnWorldInfo = new WorldInfoImpl(this.spawnWorld.getName(), Dimensions.fromEnvironment(this.spawnWorld.getEnvironment()));
 
         this.dirtyChunksContainer = new DirtyChunksContainer(this);
@@ -346,12 +346,12 @@ public class SpawnIsland implements Island {
 
     @Override
     public Location getCenter(Dimension unused) {
-        return this.center.toWorldPosition().toLocation(this.spawnWorld);
+        return this.center.toLocation(this.spawnWorld);
     }
 
     @Override
     public BlockPosition getCenterPosition() {
-        return this.center;
+        return this.center.toBlockPosition();
     }
 
     @Override
@@ -866,8 +866,10 @@ public class SpawnIsland implements Island {
     @Override
     public boolean hasPermission(SuperiorPlayer superiorPlayer, IslandPrivilege islandPrivilege) {
         boolean checkForProtection = islandPrivilege != IslandPrivileges.FLY;
-        return (checkForProtection && !plugin.getSettings().getSpawn().isProtected()) || superiorPlayer.hasBypassModeEnabled() ||
-                superiorPlayer.hasPermissionWithoutOP("superior.admin.bypass." + islandPrivilege.getName()) ||
+        return (checkForProtection && !plugin.getSettings().getSpawn().isProtected()) ||
+                superiorPlayer.hasBypassModeEnabled() ||
+                superiorPlayer.hasBypassPermission(islandPrivilege) ||
+                superiorPlayer.hasPermissionWithoutOP("superior.admin.bypass.*") ||
                 hasPermission(SPlayerRole.guestRole(), islandPrivilege);
     }
 
