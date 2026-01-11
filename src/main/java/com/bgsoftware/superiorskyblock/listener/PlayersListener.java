@@ -13,8 +13,6 @@ import com.bgsoftware.superiorskyblock.api.wrappers.SuperiorPlayer;
 import com.bgsoftware.superiorskyblock.core.LazyReference;
 import com.bgsoftware.superiorskyblock.core.Materials;
 import com.bgsoftware.superiorskyblock.core.ObjectsPools;
-import com.bgsoftware.superiorskyblock.core.events.args.PluginEventArgs;
-import com.bgsoftware.superiorskyblock.core.events.plugin.PluginEvent;
 import com.bgsoftware.superiorskyblock.core.events.plugin.PluginEventsFactory;
 import com.bgsoftware.superiorskyblock.core.formatting.Formatters;
 import com.bgsoftware.superiorskyblock.core.formatting.impl.ChatFormatter;
@@ -35,7 +33,6 @@ import com.bgsoftware.superiorskyblock.player.chat.PlayerChat;
 import com.bgsoftware.superiorskyblock.player.permissions.PlayerPermissionsStore;
 import com.bgsoftware.superiorskyblock.player.respawn.RespawnActions;
 import com.bgsoftware.superiorskyblock.world.BukkitEntities;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -254,6 +251,12 @@ public class PlayersListener extends AbstractGameEventListener {
             case VOID_TELEPORT:
             case SUCCESS:
                 break;
+            case LEAVE_ISLAND_TO_OUTSIDE:
+                // Only cancel the event if player is not inside vehicle. If the player is inside the vehicle,
+                // IslandOutsideListener will detect it and teleport him away.
+                if (!player.isInsideVehicle())
+                    e.setCancelled();
+                break;
             default:
                 e.setCancelled();
                 break;
@@ -407,23 +410,7 @@ public class PlayersListener extends AbstractGameEventListener {
 
             String message = e.getArgs().message;
 
-            PluginEvent<PluginEventArgs.IslandChat> event = PluginEventsFactory.callIslandChatEvent(island, superiorPlayer,
-                    superiorPlayer.hasPermissionWithoutOP("superior.chat.color") ? Formatters.COLOR_FORMATTER.format(message) : message);
-
-            if (event.isCancelled())
-                return;
-
-            IslandUtils.sendMessage(island, Message.TEAM_CHAT_FORMAT, Collections.emptyList(),
-                    superiorPlayer.getPlayerRole(), superiorPlayer.getName(), event.getArgs().message);
-
-            Message.SPY_TEAM_CHAT_FORMAT.send(Bukkit.getConsoleSender(), superiorPlayer.getPlayerRole().getDisplayName(),
-                    superiorPlayer.getName(), event.getArgs().message);
-            for (Player _onlinePlayer : Bukkit.getOnlinePlayers()) {
-                SuperiorPlayer onlinePlayer = plugin.getPlayers().getSuperiorPlayer(_onlinePlayer);
-                if (onlinePlayer.hasAdminSpyEnabled())
-                    Message.SPY_TEAM_CHAT_FORMAT.send(onlinePlayer, superiorPlayer.getPlayerRole().getDisplayName(),
-                            superiorPlayer.getName(), event.getArgs().message);
-            }
+            IslandUtils.handleIslandChat(island, superiorPlayer, message);
         } else if (e.getArgs().format != null) {
             e.getArgs().format = Formatters.CHAT_FORMATTER.format(new ChatFormatter.ChatFormatArgs(e.getArgs().format, superiorPlayer, island));
         }
