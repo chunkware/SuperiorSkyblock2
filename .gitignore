@@ -12,3 +12,11 @@ build
 # Ignore output generated files
 target
 out
+
+build_log*.txt
+NMS
+Hooks
+bin
+archive
+.vscode
+API
